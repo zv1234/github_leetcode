@@ -60,5 +60,44 @@ class Solution(object):
                 q=headA
         return p
 
+#19 删除链表的倒数第N个节点，给定一个链表，删除链表第倒数第N个节点，并返回链表的头节点
+'''
+题解分析：
+单指针：一次遍历计算链表长度，然后遍历l-n+1就是倒数n的节点
+双指针：初始化fast与slow指针
+双指针fast与slow，fast先走n，然后知道fast指针走到结尾，最后slow指针指向倒数n
+'''
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        dummy = ListNode(0, head)
+        first = head
+        second = dummy
+        for i in range(n):
+            first = first.next
+        while first:
+            first = first.next
+            second = second.next
+
+        second.next = second.next.next
+        return dummy.next
+
+
+
+'''
+注意：
+1。在调用next的字段之前，始终检查节点是否为空
+2。仔细观察循环的结束条件
+'''
+
+
 
 
