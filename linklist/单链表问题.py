@@ -94,4 +94,50 @@ class Solution(object):
 
 
 
+#234回文链表 判断一个链表是否为回文链表
+'''
+题解：快慢指针，使得慢指针走到链表当中点，然后快指针指向头节点，直到慢指针到结尾，判断是否相等
+'''
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def isPalindrome(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        #判空
+        if not  head:
+            return True
+        #快慢指针找到中间节点
+        fast=head
+        slow=head
+        while fast.next and fast.next.next:
+            fast=fast.next.next
+            slow=slow.next
+        #将后序链表反转
+        pre=None
+        cur=slow.next
+        #将前后分开
+        slow.next=None
+        while cur:
+            tmp=cur.next
+            cur.next=pre
+            pre=cur
+            cur=tmp
+        #前后链表对比
+        while pre:
+            if head.val!=pre.val:
+                return False
+            head=head.next
+            pre=pre.next
+        return True
+
+
+
 
