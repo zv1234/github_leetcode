@@ -64,3 +64,38 @@ class Solution(object):
         a=l1
         b=l2
 
+
+#旋转链表
+'''
+题解：先将链表链接为一个环，新到链表到表尾为n-k%n-1 ,新链表到表头为n-k%n
+时间复杂度o(n)
+'''
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def rotateRight(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        if not head:
+            return None
+        if not head.next:
+            return head
+        p=head
+        n=1
+        while p.next:
+            p=p.next
+            n+=1
+        p.next=head
+        cur=head
+        for i in range(n-k%n-1):
+            cur=cur.next
+        pre=cur.next
+        cur.next=None
+        return pre
+
