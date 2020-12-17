@@ -70,7 +70,7 @@ class Solution:
 例如，给定一个列表 temperatures = [73, 74, 75, 71, 69, 72, 76, 73]，你的输出应该是 [1, 1, 4, 2, 1, 1, 0, 0]。
 '''
 '''
-题解分析：辅助栈
+题解分析：单调栈
 好像有点看不懂 时间复杂度o(n) 空间复杂度o(n)
 '''
 
@@ -90,3 +90,33 @@ class Solution(object):
                 ans[prev]=i-prev
             stack.append(i)
         return ans
+#单调栈问题模板
+'''
+class solution(object):
+    def moban_single_stack(self,arr):
+        stack=[]
+        ans=定义一个长度和arr一样长的数组，并初始化为-1
+        for i in range(arr):
+            while stack and arr[i]>arr[栈顶元素]:
+                peek=弹出栈顶元素
+                ans[peek]=i-peek
+            stack.append(i)
+        return ans
+'''
+
+
+'''
+总结：栈：单调栈使用 一般处理next greater element 
+        循环数组 ，如果求next greater element ，假设数组是环形的 ，一般通过%运算来实现环形
+'''
+
+'''
+练习：
+42接雨水
+84 柱状图中最大的矩形
+去除重复字母
+移除k位数字
+下一个更大元素Ⅰ
+最短无序连续子数组
+股票价格跨度
+'''
