@@ -37,3 +37,6 @@ class solution(object):
 #递归实现
 
 
+#347前k个高频元素
+
+
