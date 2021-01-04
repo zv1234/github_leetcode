@@ -202,3 +202,20 @@ class Solution:
             return end
         else:
             return start
+
+
+# 给定一个字符串（以字符数组的形式给出）和一个偏移量，根据偏移量原地旋转字符串(从左向右旋转)。
+class Solution:
+    #@param A: An integers list.
+    #@return: return any of peek positions.
+    def findPeak(self, str,offset):
+        # write your code here
+        '''
+        输入:  str="abcdefg", offset = 3
+        输出:  str = "efgabcd"
+        样例解释:  注意是原地旋转，即str旋转后为"efgabcd"
+        '''
+        offest=offset%len*(str)
+        str.split("")
+        for i in range(offest):
+            str[i]

@@ -27,6 +27,42 @@ class Solution(object):
             dp[i] = max(dp[i - 2] + nums[i], dp[i - 1])
         return dp[size - 1]
 
+# 给出一个非负整数数组，你最初定位在数组的第一个位置。　　　
+# 数组中的每个元素代表你在那个位置可以跳跃的最大长度。　　　　
+# 判断你是否能到达数组的最后一个位置。
+# [2,3,1,1,4]
+'''
+1.初始化
+2.dp[i]=if dp[j]==True and j+A[i]>=i dp[i]=True
+3.初始化条件dp[0]=True
+'''
+class Solution:
+    """
+    @param A: A list of integers
+    @return: A boolean
+    """
+    def canJump(self, A):
+        if not A:
+            return False
+        n = len(A)
+        # state: dp[i] 代表能否跳到坐标 i
+        dp = [False] * n
+        # initialization: 一开始站在0这个位置
+        dp[0] = True
+        # function
+        for i in range(1, n):
+            for j in range(i):
+                # 高效的写法:
+                if dp[j] and j + A[j] >= i:
+                    dp[i] = True
+                    break
+                # 偷懒的写法
+                # dp[i] = dp[i] or dp[j] and (j + A[j] >= i)
+
+        # answer
+        return dp[n - 1]
+
+
 # 413.ArithmeticSlices(Medium)题目描述给定一个数组，求这个数组中连续且等差的子数组一共有多少个。
 '''
 1.定义dp[i]表示当前以第i个数字结尾的数字有多少个等差数组
