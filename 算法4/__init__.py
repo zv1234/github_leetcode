@@ -25,7 +25,7 @@ def selection(nums):
 '''
 def insertion(nums):
     a=len(nums)
-    for i in range(a):
+    for i in range(1,a):
         key=nums[i]
         #将a[i]插入到a[i-1],a[i-2],a[i-3]...中
         j=i-1
@@ -61,4 +61,3 @@ def shellSort(arr):
 
 if __name__ == '__main__':
     a=[1,2,3,6,4,9,5,10,17,11]
-    print selection(a)

@@ -39,7 +39,6 @@ class Solution(object):
 双指针 
 '''
 
-
 class Solution(object):
     def merge(self, nums1, m, nums2, n):
         """
@@ -157,7 +156,6 @@ class Solution(object):
 
         left, right = 0, 0  # 两个指针
         valid = 0  # 记录有多少个符合t字符串的字符进入到了窗口中
-
         start, lenght = 0, float("inf")  # 初始化结果， start 表示字串开始，lenght表示最短子串个数
         while (right < len(s)):
             s_str = s[right]
@@ -169,7 +167,6 @@ class Solution(object):
             if s_str in need:
                 if window[s_str] == need[s_str]:  # windows 中记录的个数与need 中记录的个数相等，说明这个字符已经满足条件
                     valid += 1
-
                     # 当valid == len(need) 之后开始left 开始右移动，减小窗口
             while (valid == len(need)):
 
@@ -177,13 +174,12 @@ class Solution(object):
                     start = left
                     lenght = right - left
 
-                d = s[left];
+                d = s[left]
                 left += 1  # left 右移
                 if d in need:
                     if (window[d] == need[d]):  # 如果移出去的字符刚好符合need 则left 右移后字串不符合条件。
                         valid -= 1
                     window[d] -= 1  # 在窗口中将移出去的字符数减1
-
         return "" if lenght == float("inf") else s[start:lenght + start]
 
     def my_min(self, s, t):
