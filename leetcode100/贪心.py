@@ -208,7 +208,7 @@ class Solution(object):
                 if i + 2 < n and nums[i] > nums[i + 2]:  # 特殊情况
                     nums[i] = nums[i + 1]
                 else:  # 常规情况
-                    i+2>=n
+                    # i+2>=n
                     nums[i + 1] = nums[i]
                 break
         for i in range(n - 1):
