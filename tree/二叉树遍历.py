@@ -81,7 +81,7 @@ class Solution(object):
                 cur=cur.left
             else:
                 head=stack.pop()
-                print head.val
+                print (head.val)
                 head=head.right
 
 
