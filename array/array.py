@@ -69,3 +69,26 @@ class Solution(object):
                 # 否则的话，我们就可以与上一区间进行合并
                 merged[-1][1] = max(merged[-1][1], interval[1])
         return merged
+
+
+#旋转数组
+# 给你一幅由 N × N 矩阵表示的图像，其中每个像素的大小为 4 字节。请你设计一种算法，将图像旋转 90 度。
+'''
+方法一：使用额外空间  对于矩阵中第 i行第j列旋转倒数第i列第j个位置
+
+方法二：
+'''
+class Solution(object):
+    def rotate(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: None Do not return anything, modify matrix in-place instead.
+        """
+        n = len(matrix)
+        # Python 这里不能 matrix_new = matrix 或 matrix_new = matrix[:] 因为是引用拷贝
+        matrix_new = [[0] * n for _ in range(n)]
+        for i in range(n):
+            for j in range(n):
+                matrix_new[j][n - i - 1] = matrix[i][j]
+        # 不能写成 matrix = matrix_new
+        matrix[:] = matrix_new
