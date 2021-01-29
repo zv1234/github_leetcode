@@ -26,7 +26,7 @@ class solution:
             else:
                 cur=cur.next
                 parent=parent.next
-        return head.next
+        return new_head.next
 
 #翻转链表中第m个节点到第n个节点的部分
 '''
@@ -88,6 +88,67 @@ class Solution(object):
 3. Reverse a Linked List
 4. Merge Two Linked Lists
 5. Middle of a Linked List
-'''
+# '''
+# 给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。
+# 进阶：
+# 你可以在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序吗？
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def sortList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+
+
 
 # 3.two pointers in linked list
+'''
+1. Middle of Linked List
+2. Remove Nth Node From End of List
+3. Linked List Cycle I, II
+4. Rotate List
+'''
+# 141给定一个链表，判断链表中是否有环。
+class Solution(object):
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+
+        if not head or not head.next:
+            return False
+
+        slow = head
+        fast = head.next
+
+        while slow != fast:
+            if not fast or not fast.next:
+                return False
+            slow = slow.next
+            fast = fast.next.next
+
+        return True
+
+
+# 61给定一个链表，旋转链表，使得每个节点向右移动k个位置，其中k是一个非负数
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def rotateRight(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        if head==None:
+            return
