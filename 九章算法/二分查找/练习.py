@@ -132,3 +132,50 @@ ENG
 每行中的整数从左到右是排序的。
 每行的第一个数大于上一行的最后一个整数。
 '''
+
+
+#61搜索区间
+'''
+给定一个包含 n 个整数的排序数组，找出给定目标值 target 的起始和结束位置。
+如果目标值不在数组中，则返回[-1, -1]
+'''
+
+
+class Solution:
+    """
+    @param A: an integer sorted array
+    @param target: an integer to be inserted
+    @return: a list of length 2, [index1, index2]
+    """
+
+    def searchRange(self, A, target):
+        # write your code here
+        if not A or len(A) == 0:
+            return [-1, -1]
+
+        start, end = 0, len(A) - 1
+        while start + 1 < end:
+            mid = int((end - start) / 2 + start)
+            if A[mid] < target:
+                start = mid
+            else:
+                end = mid
+        if A[start] == target:
+            leftBound = start
+        elif A[end] == target:
+            leftBound = end
+        else:
+            return [-1, -1]
+        start, end = leftBound, len(A) - 1
+        while start + 1 < end:
+            mid = int((end - start) / 2 + start)
+            if A[mid] <= target:
+                start = mid
+            else:
+                end = mid
+        if A[end] == target:
+            rightBound = end
+        else:
+            rightBound = start
+        return [leftBound, rightBound]
+
