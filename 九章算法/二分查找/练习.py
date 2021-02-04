@@ -179,3 +179,56 @@ class Solution:
             rightBound = start
         return [leftBound, rightBound]
 
+#585. 山脉序列中的最大值
+'''
+给 n 个整数的山脉数组，即先增后减的序列，找到山顶（最大值)
+'''
+class Solution:
+    """
+    @param nums: a mountain sequence which increase firstly and then decrease
+    @return: then mountain top
+    """
+    def mountainSequence(self, nums):
+        # write your code here
+        if len(nums)==0:
+            return -1
+        start=0
+        end=len(nums)-1
+        while start+1<end:
+            mid=int((end-start)/2)+start
+            if nums[mid]>nums[mid+1]:
+                end=mid
+            else:
+                start=mid
+        if nums[start]>nums[end]:
+            return nums[start]
+        else:
+            return  nums[end]
+
+# 75. 寻找峰值
+'''
+你给出一个整数数组(size为n)，其具有以下特点：
+相邻位置的数字是不同的
+A[0] < A[1] 并且 A[n - 2] > A[n - 1]
+假定P是峰值的位置则满足A[P] > A[P-1]且A[P] > A[P+1]，返回数组中任意一个峰值的位置。
+'''
+class Solution:
+    """
+    @param A: An integers array.
+    @return: return any of peek positions.
+    """
+    def findPeak(self, A):
+        # write your code here
+        if len(A)==1:
+            return A[0]
+        start=0
+        end=len(A)-1
+        while start+1<end:
+            mid=((end-start)>>1)+start
+            if A[mid]>A[mid-1] and A[mid]>A[mid+1]:
+                return mid
+            elif A[mid-1]<A[mid]<A[mid+1]:
+                start=mid
+            else:
+                end=mid
+        return -1
