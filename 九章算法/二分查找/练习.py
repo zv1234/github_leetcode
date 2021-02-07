@@ -232,3 +232,82 @@ class Solution:
             else:
                 end=mid
         return -1
+
+# 62. 搜索旋转排序数组
+'''
+假设有一个排序的按未知的旋转轴旋转的数组(比如，0 1 2 4 5 6 7 可能成为4 5 6 7 0 1 2)。
+给定一个目标值进行搜索，如果在数组中找到目标值返回数组中的索引位置，否则返回-1。你可以假设数组中不存在重复的元素。
+'''
+class Solution:
+    """
+    @param A: an integer rotated sorted array
+    @param target: an integer to be searched
+    @return: an integer
+    """
+    def search(self, A, target):
+        # write your code here
+        if not A or len(A) == 0:
+            return -1
+        start=0
+        end=len(A)-1
+        while start+1<end:
+            mid=(end-start)>>1+start
+            if A[mid]==target:
+                return mid
+            if A[mid]>A[start]:
+                if target>A[start] and target<A[mid]:
+                    end=mid
+                else:
+                    start=mid
+            else:
+                if target>A[mid] and target<A[end]:
+                    start=mid
+                else:
+                    end=mid
+
+        if A[start]==target:
+            return start
+        if A[end]==target:
+            return end
+        return -1
+
+
+# 描述x的平方根
+'''
+实现 int sqrt(int x) 函数，计算并返回 x 的平方根。
+'''
+class Solution:
+    """
+    @param x: An integer
+    @return: The sqrt of x
+    """
+    def sqrt(self, x):
+        # write your code here
+        if x == 0 or x == 1:
+            return x
+        start = 1
+        end = x
+        while start + 1 < end:
+            mid = ((end - start) >> 1) + start
+            if mid * mid <= x and (mid + 1) * (mid + 1) >= x:
+                return mid
+            elif mid * mid > x:
+                end = mid
+            else:
+                start = mid
+        return -1
+
+#木材价格
+'''
+有一些原木，现在想把这些木头切割成一些长度相同的小段木头，需要得到的小段的数目至少为 k。
+当然，我们希望得到的小段越长越好，你需要计算能够得到的小段木头的最大长度。
+'''
+class Solution:
+    """
+    @param L: Given n pieces of wood with length L[i]
+    @param k: An integer
+    @return: The maximum length of the small pieces
+    """
+    def woodCut(self, L, k):
+        # write your code here
+        pass
