@@ -232,26 +232,3 @@ class Solution:
             else:
                 end=mid
         return -1
-
-# 141 x的开方
-class Solution:
-    """
-    @param x: An integer
-    @return: The sqrt of x
-    """
-
-    def sqrt(self, x):
-        # write your code here
-        if x <= 1:
-            return x
-        start = 1
-        end = x
-        while start + 1 < end:
-            mid = start + (end - start) >> 1
-            if mid * mid <= x and (mid + 1) * (mid + 1) >= x:
-                return mid
-            if mid * mid > x:
-                end = mid
-            else:
-                start = mid
-        return 0
