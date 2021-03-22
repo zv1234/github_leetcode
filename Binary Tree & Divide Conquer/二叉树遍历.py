@@ -39,6 +39,22 @@ class Solution:
             if node.left:
                 stack.append(node.left)
         return preorder
+    @staticmethod
+    def preorderTraversal(root):
+        stack = []
+        res = []
+        if not root:
+            return []
+        while root or stack:
+            while root:
+                res.append(root.val)
+                stack.append(root)
+                root = root.left  # 一直遍历到最左边的那个节点
+            if stack:
+                temp = stack.pop()
+                root = temp.right
+        return res
+
 
     #中序遍历http://www.jiuzhang.com/solutions/binary-tree-inorder-traversal/
     def inorderTraversal(self, root):
@@ -61,7 +77,6 @@ class Solution:
             if stack:
                 inorder.append(stack[-1].val)
         return inorder
-
     def inorderTraversal(self, root):
         if root == None:
             return []
@@ -72,13 +87,26 @@ class Solution:
             while node:
                 stack.append(node)
                 node = node.left
-
             node = stack.pop()
             output.append(node.val)
-
             node = node.right
         return output
 
+    def inorderTraversal(root):
+        stack = []
+        res = []
+        if not root:
+            return []
+        while root or stack:
+            while root:
+                stack.append(root)
+                root = root.left
+            if stack:
+                temp = stack.pop()
+                root = temp.right
+                res.append(temp.val)
+        return res
+    #后序遍历
     def postorderTraversal(self, root):
         # write your code here
         # if root is None:
@@ -91,15 +119,32 @@ class Solution:
             while curnode:
                 stack.append(curnode)
                 curnode = curnode.left if curnode.left else curnode.right
-
             curnode = stack.pop()
             result.append(curnode.val)
-
             if stack and stack[-1].left == curnode:
                 curnode = stack[-1].right
             else:
                 curnode = None
         return result
+
+    def postorderTraversal(root):
+        res = []
+        if not root:
+            return res
+        stack = []
+        stack.append(root)
+        while stack:  # 这里的stack 同时存有节点与节点的值
+            temp = stack.pop()
+            if type(temp) is Treenode:  # 判断当前的值的类型是否是二叉树节点
+                stack.append(temp.val)
+                if temp.right:
+                    stack.append(temp.right)
+                if temp.left:
+                    stack.append(temp.left)
+            else:  # 若为节点值则存入
+                res.append(temp)
+        return res
+
     #二叉树层序遍历
     def levelOrder(self, root):
         if root is None:
