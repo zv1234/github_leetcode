@@ -219,3 +219,4 @@ class Solution:
         str.split("")
         for i in range(offest):
             str[i]
+            pass
