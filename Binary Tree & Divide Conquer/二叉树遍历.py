@@ -5,6 +5,29 @@
 [二叉树的前序遍历](  # 二叉树的前序遍历)
 [二叉树的中序遍历](  # 二叉树的中序遍历)
 [二叉树的后序遍历](  # 二叉树的后序遍历)
+def preTraverse(root):
+
+    """前序遍历"""
+    if root ==None:
+        return
+    print root.value
+    preTraverse(root.left)
+    preTraverse(root.right)
+def midTraverse(root):
+    """中序遍历"""
+    if root==None:
+        return
+    midTraverse(root.left)
+    print root.value
+    midTraverse(root.right)
+def afterTraverse(root):
+    """后序遍历"""
+    if root==None:
+        return
+    afterTraverse(root.left)
+    afterTraverse(root.right)
+    print root.value
+
 
 '''
 """
