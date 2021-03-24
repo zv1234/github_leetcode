@@ -34,7 +34,7 @@ def afterTraverse(root):
 Definition of TreeNode:
 """
 from collections import deque
-class TreeNode:
+class TreeNode(object):
     def __init__(self, val):
         self.val = val
         self.left, self.right = None, None
@@ -158,7 +158,7 @@ class Solution:
         stack.append(root)
         while stack:  # 这里的stack 同时存有节点与节点的值
             temp = stack.pop()
-            if type(temp) is Treenode:  # 判断当前的值的类型是否是二叉树节点
+            if type(temp) is TreeNode:  # 判断当前的值的类型是否是二叉树节点
                 stack.append(temp.val)
                 if temp.right:
                     stack.append(temp.right)
@@ -237,8 +237,9 @@ class Solution:
         return maxSum
 
     def maxPathHelper(self, root):
+        import sys
         if root is None:
-            return -sys.maxint, 0
+            return sys.maxint, 0
 
         left = self.maxPathHelper(root.left)
         right = self.maxPathHelper(root.right)
@@ -541,4 +542,135 @@ class Solution:
 
 
 
+# 101对称二叉树
 
+# class Solution:
+#     def isSymmetric(self, root):
+#         if not root:
+#             return  True
+# 	    def dfs(left,right):
+# 			# 递归的终止条件是两个节点都为空
+# 			# 或者两个节点中有一个为空
+# 			# 或者两个节点的值不相等
+# 			if not (left or right):
+# 				return True
+# 			if not (left and right):
+# 				return False
+# 			if left.val!=right.val:
+# 				return False
+# 			return dfs(left.left,right.right) and dfs(left.right,right.left)
+# 		# 用递归函数，比较左节点，右节点
+# 	    return dfs(root.left,root.right)
+#
+#     def issysmmetric(self,root):
+#         if not root or not (root.left or root.right):
+#             return True
+# 		# 用队列保存节点
+# 		queue = [root.left,root.right]
+# 		while queue:
+# 			# 从队列中取出两个节点，再比较这两个节点
+# 			left = queue.pop(0)
+# 			right = queue.pop(0)
+# 			# 如果两个节点都为空就继续循环，两者有一个为空就返回false
+# 			if not (left or right):
+# 				continue
+# 			if not (left and right):
+# 				return False
+# 			if left.val!=right.val:
+# 				return False
+# 			# 将左节点的左孩子， 右节点的右孩子放入队列
+# 			queue.append(left.left)
+# 			queue.append(right.right)
+# 			# 将左节点的右孩子，右节点的左孩子放入队列
+# 			queue.append(left.right)
+# 			queue.append(right.left)
+# 		 return True
+
+# 104二叉树的最大深度
+class Solution:
+    def maxDepth(self, root):
+        # if root is None:
+        #     return 0
+        # left= self.maxDepth(root.left)
+        # right=self.maxDepth(root.right)
+        # return max(left,right)+1
+    #层序遍历
+        if root is None:
+            return 0
+        queue=[root]
+        a=0
+        while queue:
+            for _ in range(len(queue)):
+                node=queue.pop(0)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            a+=1
+        return a
+
+# 111二叉树最小深度
+class Solution:
+    def minDepth(self, root):
+        #递归
+        def dfs(root):
+            if root is None:
+                return 0
+            left=dfs(root.left)
+            right=dfs(root.right)
+            # // 当⼀个左⼦树为空，右不为空，这时并不是最低点
+            if root.left is None and  root.right is not None :
+                return 1+right
+            # // 当⼀个右⼦树为空，左不为空，这时并不是最低点
+            if root.right is None and  root.left is not None:
+                return 1+left
+            return 1+min(left,right)
+
+        return dfs(root)
+
+        #迭代
+
+
+#222完全二叉树节点个数
+class Solution:
+    def countNodes(self,root):
+        # if root is None:
+        #     return 0
+        # left=self.countNodes(root.left)
+        # right=self.countNodes(root.right)
+        # return left+right+1
+        if root is None:
+            return 0
+        queue=[root]
+        result=0
+        while queue:
+            for _ in range(len(queue)):
+                node=queue.pop(0)
+                result+=1
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return result
+
+# 110平衡二叉树
+# 257 二叉树所有路径
+
+#100相同的树
+class Solution:
+    def isSameTree(self, p,q):
+        #递归
+        if p is None and q is None:
+            return True
+        elif p is None and q is not None:
+            return False
+        elif p is not None and q is None:
+            return False
+        elif p.val!=q.val:
+            return False
+        else:
+            return self.isSameTree(p.left,q.left) and self.isSameTree(p.right,q.right)
+
+    #迭代
+
+# 572另一个树的子树
