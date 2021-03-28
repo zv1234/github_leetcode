@@ -674,3 +674,187 @@ class Solution:
     #迭代
 
 # 572另一个树的子树
+
+
+#404左叶子的和
+class Solution:
+    def sumOfLeftLeaves(self, root):
+        if root is None:
+            return 0
+        left = self.sumOfLeftLeaves(root.left)
+        right = self.sumOfLeftLeaves(root.right)
+        mid = 0
+        if root.left is not None and root.left.left == None and root.left.right == None:
+            mid = root.left.val
+        result = mid + left + right
+        return result
+    def sumOfLeftLeaves_(self,root):
+        if root is None:
+            return 0
+        stack = [root]
+        result = 0
+        while stack:
+            node = stack.pop(0)
+            if node.left is not None and node.left.left == None and node.left.right == None:
+                result += node.left.val
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+        return result
+
+#112路径总和
+class Solution:
+    def hasPathSum(self, root, targetSum):
+
+# if (!cur->left && !cur->right && count == 0) return true; // 遇到叶⼦节点，并且计数
+# 为0
+# if (!cur->left && !cur->right) return false; // 遇到叶⼦节点直接返回
+# if (cur->left) { // 左
+# count -= cur->left->val; // 递归，处理节点;
+# if (traversal(cur->left, count)) return true;
+# count += cur->left->val; // 回溯，撤销处理结果
+#  }
+# if (cur->right) { // 右
+# count -= cur->right->val; // 递归，处理节点;
+# if (traversal(cur->right, count)) return true;
+# count += cur->right->val; // 回溯，撤销处理结果
+#  }
+# return false;
+#  }
+# public:
+# bool hasPathSum(TreeNode* root, int sum) {
+# if (root == NULL) return false;
+# return traversal(root, sum - root->val);
+#  }
+# };
+        def help(cur,count):
+            if cur.left==None and cur.right==None and count==0:
+                return True
+            if cur.left==None and cur.right==None:
+                return False
+            if cur.left:
+                count-=cur.left.val
+                if help(cur.left,count):
+                    return True
+                count+=cur.left.val
+            if cur.right:
+                count-=cur.right.val
+                if help(cur.right,count):
+                    return True
+                count+=cur.right.val
+            return False
+        if root is None:
+            return False
+        return help(root,targetSum-root.val)
+
+    #迭代
+    def hasPathSum(self,root,count):
+        pass
+
+#113路径总和
+
+
+#106中序和后序构建二叉树
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, inorder, postorder):
+# if (postorder.size() == 0) return NULL;
+# // 第⼆步：后序遍历数组最后⼀个元素，就是当前的中间节点
+# int rootValue = postorder[postorder.size() - 1];
+# TreeNode* root = new TreeNode(rootValue);
+# // 叶⼦节点
+# if (postorder.size() == 1) return root;
+# // 第三步：找切割点
+# int delimiterIndex;
+# for (delimiterIndex = 0; delimiterIndex < inorder.size(); delimiterIndex++) {
+# if (inorder[delimiterIndex] == rootValue) break;
+#  }
+# // 第四步：切割中序数组，得到 中序左数组和中序右数组
+# // 第五步：切割后序数组，得到 后序左数组和后序右数组
+# // 第六步
+# root->left = traversal(中序左数组, 后序左数组);
+# root->right = traversal(中序右数组, 后序右数组);
+# return root;
+        if len(postorder)==0:
+            return None
+        rootval=postorder[-1]
+        root=TreeNode(rootval)
+        if len(postorder)==1:
+            return root
+        for i in range(len(inorder)):
+            if inorder[i]==rootval:
+                break
+        root.left = self.buildTree(inorder[0:i], postorder[0:i])
+        root.right = self.buildTree(inorder[i + 1:], postorder[i:-1])
+        return root
+
+#105前序与中序构建二叉树
+class Solution:
+    def buildTree(self, preorder, inorder):
+        if len(preorder)==0:
+            return None
+        if len(preorder)==1:
+            return TreeNode(preorder[0])
+        root=TreeNode(preorder[0])
+        rootval=preorder[0]
+        for i in range(len(inorder)):
+            if inorder[i]==rootval:
+                break
+        root.left=self.buildTree(preorder[1:i+1],inorder[0:i+1])
+        root.right=self.buildTree(preorder[i+1:],inorder[i+1:])
+        return root
+
+        # def helper(pOrder, iOrder):
+        #     if not pOrder: return None
+        #     root = TreeNode(pOrder[0])  # 前序第一个节点做为根
+        #     rootInx = iOrder.index(root.val)  # 在中序中找到前序第一个节点的位置
+        #     root.left = helper(pOrder[1:rootInx + 1], iOrder[0:rootInx])
+        #     root.right = helper(pOrder[rootInx + 1:], iOrder[rootInx + 1:])
+        #     return root
+        # return helper(preorder,inorder)
+
+
+
+#654z最大二叉树
+
+
+#617合并两个二叉树
+class Solution:
+    def mergeTrees(self, root1, root2):
+        if root1 is None:
+            return root2
+        if root2 is None:
+            return root1
+        root1.val+=root2.val
+        root1.left=self.mergeTrees(root1.left,root2.left)
+        root1.right=self.mergeTrees(root1.right,root2.right)
+        return root1
+    #迭代
+    def mergetrees(self,root1,root2):
+        pass
+
+#700二叉搜索树中的搜索
+class Solution:
+    def searchBST(self, root ,val) :
+        # if root is None or root.val==val:
+        #     return root
+        # if root.val>val:
+        #     return self.searchBST(root.left,val)
+        # if root.val<val:
+        #     return self.searchBST(root.right,val)
+        # return None
+        while root :
+            if root.val>val:
+                root=root.left
+            elif root.val<val:
+                root=root.right
+            else:
+                return root
+        return None
+
