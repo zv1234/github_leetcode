@@ -152,3 +152,155 @@ class Solution(object):
         """
         if head==None:
             return
+
+
+#203移除链表元素
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeElements(self, head, val):
+        sentinel = ListNode(0)
+        sentinel.next = head # 设置哨兵节点
+        prev, cur = sentinel, head # 前继节点，当前节点
+        while cur: # 循环终止条件
+            if cur.val == val:
+                prev.next = cur.next  # 删除节点
+            else:
+                prev = cur # 前继指针滑动
+            cur = cur.next # 当前指针滑动
+        return sentinel.next
+
+#707设计链表
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+
+class MyLinkedList:
+    def __init__(self):
+        self.size = 0
+        self.head = ListNode(0)  # sentinel node as pseudo-head
+
+    def get(self, index):
+        """
+        Get the value of the index-th node in the linked list. If the index is invalid, return -1.
+        """
+        # if index is invalid
+        if index < 0 or index >= self.size:
+            return -1
+
+        curr = self.head
+        # index steps needed
+        # to move from sentinel node to wanted index
+        for _ in range(index + 1):
+            curr = curr.next
+        return curr.val
+
+    def addAtHead(self, val) :
+        """
+        Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
+        """
+        self.addAtIndex(0, val)
+
+    def addAtTail(self, val):
+        """
+        Append a node of value val to the last element of the linked list.
+        """
+        self.addAtIndex(self.size, val)
+
+    def addAtIndex(self, index, val):
+        """
+        Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
+        """
+        # If index is greater than the length,
+        # the node will not be inserted.
+        if index > self.size:
+            return
+
+        # [so weird] If index is negative,
+        # the node will be inserted at the head of the list.
+        if index < 0:
+            index = 0
+
+        self.size += 1
+        # find predecessor of the node to be added
+        pred = self.head
+        for _ in range(index):
+            pred = pred.next
+
+        # node to be added
+        to_add = ListNode(val)
+        # insertion itself
+        to_add.next = pred.next
+        pred.next = to_add
+
+    def deleteAtIndex(self, index):
+        """
+        Delete the index-th node in the linked list, if the index is valid.
+        """
+        # if the index is invalid, do nothing
+        if index < 0 or index >= self.size:
+            return
+
+        self.size -= 1
+        # find predecessor of the node to be deleted
+        pred = self.head
+        for _ in range(index):
+            pred = pred.next
+
+        # delete pred.next
+        pred.next = pred.next.next
+
+
+#206反转链表
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head) :
+        pre=None
+        cur=head
+        while cur:
+            temp=cur.next
+            cur.next=pre
+            pre=cur
+            cur=temp
+        return pre
+
+# 19删除链表倒数n的节点
+
+class Solution:
+    def removeNthFromEnd(self, head, n):
+        dummy_node = ListNode(0)
+        dummy_node.next = head
+        cur = head
+        p = dummy_node
+        for i in range(n):
+            cur = cur.next
+        while cur:
+            cur = cur.next
+            p = p.next
+        p.next = p.next.next
+        return dummy_node.next
+
+        # dummy = ListNode(0, head)
+        # first = head
+        # second = dummy
+        # for i in range(n):
+        #     first = first.next
+
+        # while first:
+        #     first = first.next
+        #     second = second.next
+
+        # second.next = second.next.next
+        # return dummy.next
+
+

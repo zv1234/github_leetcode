@@ -55,7 +55,51 @@ class Solution:
             index += 1
         return str1[:index]
 
+#26，27原地删除数组
 
+class Solution:
+    def removeDuplicates(self, nums):
+        i = 0
+        for j in range(1, len(nums)):
+            if nums[j] != nums[i]:
+                i += 1
+                nums[i] = nums[j]
+        return i + 1
+
+class Solution:
+    def removeElement(self, nums, val):
+        slow=0
+        fast=0
+        while fast<len(nums):
+            if nums[fast]!=val:
+                nums[slow]=nums[fast]
+                slow+=1
+            fast+=1
+        return slow
+
+
+#66加一
+class Solution:
+    def plusOne(self, digits):
+        for i in range(len(digits)-1, -1, -1):
+            if digits[i] is not 9:
+                digits[i] += 1
+                return digits
+            else:
+                digits[i] = 0
+                if digits[0] is 0:
+                    digits.insert(0, 1)
+                    return digits
+
+
+#俩个数和
+class Solution:
+    def twoSum(self, nums, target):
+        tmp = {}
+        for k, v in enumerate(nums):
+            if target - v in tmp:
+                return [tmp[target - v], k]
+            tmp[v] = k
 
 
 
