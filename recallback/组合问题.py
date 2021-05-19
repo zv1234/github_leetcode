@@ -57,3 +57,31 @@ class Solution:
         backstrack(n,k,0,1)
         return reslut
     '''
+
+#39给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+
+# candidates 中的数字可以无限制重复被选取。
+#
+# 说明：
+#
+# 所有数字（包括 target）都是正整数。
+# 解集不能包含重复的组合。
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        result=[]
+        path=[]
+        def backstrack(candidates,target,Sum,startindex):
+            if Sum>target:
+                return
+            if Sum==target:
+                result.append(path[:])
+            for i in range(startindex,len(candidates)):
+                Sum+=candidates[i]
+                path.append(candidates[i])
+                # 不⽤i + 1了，表示可以重复读取当前的数
+                backstrack(candidates,target,Sum,i)
+                Sum-=candidates[i]
+                path.pop()
+        backstrack(candidates,target,0,0)
+        return result
